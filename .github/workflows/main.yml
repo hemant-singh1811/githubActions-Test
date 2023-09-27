@@ -63,13 +63,12 @@ jobs:
       
       run: |-
         gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
-        gcloud services list
 
     - id: 'gcloudcomputessh'    
       name: 'gcloud compute ssh'
       run: |-
         gcloud compute instances list --project=alphachatdb
-    
+
     - name:  PWD
       run: 'curl "pwd"'    
 
