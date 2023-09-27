@@ -29,17 +29,24 @@
 
 
 name: List services in GCP
+run-name: ${{ github.actor }} is pushing to GCP🚀
 on:
   push:
     branches:
       - main 
 
-permissions:
-  id-token: write
+env:
+    PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+    GKE_ZONE: "us-central1-a"
 
 jobs:
   Get_OIDC_ID_token:
     runs-on: ubuntu-latest
+
+    permissions:
+        id-token: write # This is required for requesting the JWT
+        contents: read  # This is required for actions/checkout      
+
     steps:
     - id: 'auth'
       name: 'Authenticate to GCP'
