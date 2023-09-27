@@ -67,8 +67,7 @@ jobs:
       name: 'gcloud compute ssh'
       run: |-
         gcloud compute instances add-metadata "alphalionserver" --zone "us-central1-a" --metadata=startup-script="#! /bin/bash
-        
-        # gcloud compute ssh --zone $GKE_ZONE "alphalionserver" --project "alphachatdb" 
+        pwd ls 
            
         
     - name:  PWD
