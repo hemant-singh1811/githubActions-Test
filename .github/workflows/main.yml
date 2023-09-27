@@ -62,8 +62,10 @@ jobs:
       run: |-
         gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
         gcloud compute ssh --zone $GKE_ZONE "alphalionserver" --project "alphachatdb" 
-        sudo systemctl reload nginx && pm2 log
-
+        pwd
+        ls
+        cd ..
+        
     - name:  PWD
       run:  pwd    
     - name:  steps.auth.outputs.credentials_file_path 
