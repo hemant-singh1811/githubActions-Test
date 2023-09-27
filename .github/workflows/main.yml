@@ -1,10 +1,12 @@
 name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push] # this event triggers the workflow
+env: 
+    name: "test"
 jobs:   # this is jobs section
   first-Job: # this is first job
     runs-on: ubuntu-latest # this is runner
-    steps:
+    steps:  # this is steps section
       - run: echo "🎉 this is first job."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
@@ -15,12 +17,12 @@ jobs:   # this is jobs section
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ env.FIREBASE_CREDENTIAL_PROJECT_ID }}."   
+      - run: echo "🍏 This job's status is ${{ env.name }}."   
       - run: echo "🍏 This job's status is ${{ job.status }}."
 
   second-job:  # this is second job
     runs-on: linux-latest  # this is runner
-    steps:
+    steps: # this is steps section
         - run: echo "🎉 this is second job event."
         - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
         - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
