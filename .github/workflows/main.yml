@@ -13,7 +13,7 @@ jobs:   # this is jobs section
       - name: run nodejs version
         run: node --version
       - name: run ls
-        run: ls -al
+        run: ls 
       - name: Run Pwd
         run: pwd
 
