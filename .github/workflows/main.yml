@@ -59,6 +59,7 @@ jobs:
     - id: 'gcloud'
       name: 'gcloud'
       run: |-
+        gcloud compute instances list --project $PROJECT ID --zone $GKE_ZONE
         gcloud auth login
         gcloud compute ssh --zone $GKE_ZONE "alphalionserver" --project "alphachatdb"
     - name:  PWD
