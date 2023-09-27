@@ -66,8 +66,9 @@ jobs:
     - id: 'gcloudcomputessh'    
       name: 'gcloud compute ssh'
       run: |-
-        gcloud compute instances add-metadata alphalionserver --zone "us-central1-a" --metadata=startup-script="#! /bin/bash
-        pwd ls 
+        gcloud compute ssh --zone $GKE_ZONE "alphalionserver" --project "alphachatdb" \
+        pwd ls
+          
            
         
     - name:  PWD
@@ -79,3 +80,5 @@ jobs:
 # projects/333939866440/locations/global/workloadIdentityPools/987654321alphaliongcppool/providers/github-identity-pool
 
 
+# gcloud compute instances add-metadata "alphalionserver" --zone "us-central1-a" --metadata=startup-script="#! /bin/bash
+      
