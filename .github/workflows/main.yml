@@ -67,6 +67,15 @@ jobs:
       run: |-
         gcloud compute ssh --zone $GKE_ZONE "alphalionserver" --project "alphachatdb"
 
+    - name: 'setup to GCP'
+      uses: 'google-github-actions/setup-gcloud@v0"
+      
+    - name :
+        run: |-
+            pwd
+            ls
+
+
 # gcloud compute instances list --project $PROJECT_ID
         # gcloud auth login
 # projects/333939866440/locations/global/workloadIdentityPools/987654321alphaliongcppool/providers/Github-dev-wif-pool/subject/SUBJECT_ATTRIBUTE_VALUE
