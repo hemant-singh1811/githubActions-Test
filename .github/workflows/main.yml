@@ -68,12 +68,12 @@ jobs:
       name: 'gcloud compute ssh'
       run: |-
         gcloud compute ssh --zone $GKE_ZONE "alphalionserver" --project "alphachatdb" --command "ls"
-        curl "pwd"
+    
           
            
         
     - name:  PWD
-      run:  pwd     
+      run: curl 'pwd'    
 
 # gcloud compute instances list --project $PROJECT_ID
         # gcloud auth login
