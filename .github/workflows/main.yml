@@ -73,7 +73,7 @@ jobs:
            
         
     - name:  PWD
-      run: curl 'pwd'    
+      run: 'curl "pwd"'    
 
 # gcloud compute instances list --project $PROJECT_ID
         # gcloud auth login
