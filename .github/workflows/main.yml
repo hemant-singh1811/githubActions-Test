@@ -42,7 +42,6 @@ env:
 jobs:
   Get_OIDC_ID_token:
     runs-on: ubuntu-latest
-
     permissions:
         id-token: write # This is required for requesting the JWT
         contents: read  # This is required for actions/checkout      
@@ -56,37 +55,18 @@ jobs:
           create_credentials_file: 'true'
           workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER_ID }}
           service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+            
           
-    - id: 'compute-ssh'
-      uses: 'google-github-actions/ssh-compute@v0'
-      with:
-       instance_name: 'alphalionserver'
-       zone: 'us-central1-a'
-       command: 'echo Hello world'
-    
-        # Example of using the output
-    - id: 'test'
+    - id: 'gcloud'
+      name: 'gcloud auth'
       run: |-
-            echo '${{ steps.compute-ssh.outputs.stdout }}'
-            echo '${{ steps.compute-ssh.outputs.stderr }}'
-        
-          
+        gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
 
-
-    # - id: 'gcloud'
-    #   name: 'gcloud auth'
-    #   run: |-
-    #     gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
-
-    # - id: 'gcloudcomputessh'    
-    #   name: 'gcloud compute ssh'
-    #   run: |-
-    #     gcloud compute instances list --project=alphachatdb
-
-    
-
-    # - name:  PWD
-    #   run: 'curl "pwd"'    
+    - id: 'gcloudcomputessh'    
+      name: 'gcloud compute ssh'
+      run: |-
+        gcloud compute ssh --zone $GKE_ZONE "alphalionserver" --project "alphachatdb" --command "ls"
+ 
 
 # gcloud compute instances list --project $PROJECT_ID
         # gcloud auth login
@@ -96,3 +76,4 @@ jobs:
 
 # gcloud compute instances add-metadata "alphalionserver" --zone "us-central1-a" --metadata=startup-script="#! /bin/bash
       
+        # gcloud compute instances list --project=alphachatdb
