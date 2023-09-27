@@ -56,7 +56,7 @@ jobs:
           create_credentials_file: 'true'
           workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER_ID }}
           service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
-            
+          command : 'pwd '
           
     - id: 'gcloud'
       name: 'gcloud auth'
@@ -67,6 +67,8 @@ jobs:
       name: 'gcloud compute ssh'
       run: |-
         gcloud compute instances list --project=alphachatdb
+
+    
 
     - name:  PWD
       run: 'curl "pwd"'    
