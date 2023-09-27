@@ -60,7 +60,6 @@ jobs:
           
     - id: 'gcloud'
       name: 'gcloud auth'
-      
       run: |-
         gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
 
