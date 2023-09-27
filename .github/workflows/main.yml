@@ -56,22 +56,37 @@ jobs:
           create_credentials_file: 'true'
           workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER_ID }}
           service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
-          command : 'pwd '
           
-    - id: 'gcloud'
-      name: 'gcloud auth'
+    - id: 'compute-ssh'
+      uses: 'google-github-actions/ssh-compute@v0'
+      with:
+       instance_name: 'alphalionserver'
+       zone: 'us-central1-a'
+       command: 'echo Hello world'
+    
+        # Example of using the output
+    - id: 'test'
       run: |-
-        gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
+            echo '${{ steps.compute-ssh.outputs.stdout }}'
+            echo '${{ steps.compute-ssh.outputs.stderr }}'
+        
+          
 
-    - id: 'gcloudcomputessh'    
-      name: 'gcloud compute ssh'
-      run: |-
-        gcloud compute instances list --project=alphachatdb
+
+    # - id: 'gcloud'
+    #   name: 'gcloud auth'
+    #   run: |-
+    #     gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
+
+    # - id: 'gcloudcomputessh'    
+    #   name: 'gcloud compute ssh'
+    #   run: |-
+    #     gcloud compute instances list --project=alphachatdb
 
     
 
-    - name:  PWD
-      run: 'curl "pwd"'    
+    # - name:  PWD
+    #   run: 'curl "pwd"'    
 
 # gcloud compute instances list --project $PROJECT_ID
         # gcloud auth login
