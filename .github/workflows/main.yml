@@ -1,29 +1,61 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [push] # this event triggers the workflow
-env: 
-    name: "test"
+# name: GitHub Actions Demo
+# run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+# on: [push] # this event triggers the workflow
+# env: 
+#     name: "test"
 
-jobs:   # this is jobs section
-  first-Job: # this is first job
-    runs-on: ubuntu-latest # this is runner
-    steps:  # this is steps section
-        # here we run some commands with the run keyword (runners)
-      - run: echo "🎉 this is first job." 
-      - name: run nodejs version
-        run: node --version
-      - name: run ls
-        run: ls 
-      - name: Run Pwd
-        run: pwd
+# jobs:   # this is jobs section
+#   first-Job: # this is first job
+#     runs-on: ubuntu-latest # this is runner
+#     steps:  # this is steps section
+#         # here we run some commands with the run keyword (runners)
+#       - run: echo "🎉 this is first job." 
+#       - name: run nodejs version
+#         run: node --version
+#       - name: run ls
+#         run: ls -al
+#       - name: Run Pwd
+#         run: pwd
 
 
-#   second-job:  # this is second job
-#     runs-on: linux  # this is runner
-#     steps: # this is steps section
-#         - run: echo "🎉 this is second job event."
-#         - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-#         - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-#         - name: Check out repository code
-#           uses: actions/checkout@v3
+# #   second-job:  # this is second job
+# #     runs-on: linux  # this is runner
+# #     steps: # this is steps section
+# #         - run: echo "🎉 this is second job event."
+# #         - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+# #         - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+# #         - name: Check out repository code
+# #           uses: actions/checkout@v3
 
+
+name: List services in GCP
+on:
+  pull_request:
+    branches:
+      - development 
+
+permissions:
+  id-token: write
+
+jobs:
+  Get_OIDC_ID_token:
+    runs-on: ubuntu-latest
+    steps:
+    - id: 'auth'
+      name: 'Authenticate to GCP'
+      uses: 'google-github-actions/auth@v0.3.1'
+      with:
+          create_credentials_file: 'true'
+          workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER_ID }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+          
+    - id: 'gcloud'
+      name: 'gcloud'
+      run: |-
+        gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
+        gcloud services list
+    - name:  steps.auth.outputs.credentials_file_path 
+      run: echo ${{ steps.auth.outputs.credentials_file_path }}   
+
+    - name:   secrets.WORKLOAD_IDENTITY_PROVIDER_ID
+      run: echo ${{ secrets.WORKLOAD_IDENTITY_PROVIDER_ID }}
