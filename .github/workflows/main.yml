@@ -62,16 +62,13 @@ jobs:
       name: 'gcloud auth'
       run: |-
         gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
-
+        gcloud services list
 
     - id: 'gcloudcomputessh'    
       name: 'gcloud compute ssh'
       run: |-
         gcloud compute ssh --zone $GKE_ZONE "alphalionserver" --project "alphachatdb" --command "ls"
     
-          
-           
-        
     - name:  PWD
       run: 'curl "pwd"'    
 
