@@ -68,6 +68,8 @@ jobs:
         gcloud compute ssh --zone $GKE_ZONE "alphalionserver" --project "alphachatdb"
 
     - run: gcloud projects list
+    - name: Run Pwd
+      run: pwd
     - name: Run script.sh
       run: |
            cd / && cd home &&  cd ubuntu && ls && cd Alpha_host/ && ls
