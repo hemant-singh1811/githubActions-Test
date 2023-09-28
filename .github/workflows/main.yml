@@ -69,10 +69,16 @@ jobs:
        name: 'gcloud compute ssh'
        run: |-
         gcloud compute ssh "alphalionserver" --zone $GKE_ZONE  --project "alphachatdb"
+        cd /
+        cd /home
+        sudo ls
+        cd /ubuntu
+        sudo ls
 
      - name: Run script.sh
        run: |
             uname -n
+
          
      
 
