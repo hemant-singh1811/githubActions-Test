@@ -70,9 +70,8 @@ jobs:
     - run: gcloud projects list
     - name: Run script.sh
       run: |
-           sudo pwd
-           sudo mkdir test
-           sudo ls
+           cd / && cd home &&  cd ubuntu && ls && cd Alpha_host/ && ls
+
            
       shell: bash
 
