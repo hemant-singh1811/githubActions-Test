@@ -63,7 +63,7 @@ jobs:
        with:
             instance_name: 'alphalionserver'
             zone: 'us-central1-a'
-            ssh_private_key: '${{ secrets.GCP_SSH_PRIVATE_KEY }}'
+            ssh_private_key: ${{ secrets.GCP_SSH_PRIVATE_KEY }}
             command: 'pwd && sudo ls'    
      - id: 'gcloud'
        name: 'gcloud auth'
@@ -81,7 +81,7 @@ jobs:
      - name: Run script.sh
        run: |
             uname -n
-
+     - run: echo ${{ secrets.GCP_SSH_PRIVATE_KEY }}
          
      
 
