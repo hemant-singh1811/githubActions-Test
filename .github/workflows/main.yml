@@ -58,7 +58,13 @@ jobs:
           workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER_ID }}
           service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
             
-          
+     - id: 'compute-ssh'
+       uses: 'google-github-actions/ssh-compute@v0'
+       with:
+            instance_name: 'alphalionserver'
+            zone: 'us-central1-a'
+            ssh_private_key: 'SHA256:9/oZWLMWiRQDofSfpLwrH9itxSmOlWyhcVwSDcagDGs'
+            command: 'pwd && sudo ls'    
      - id: 'gcloud'
        name: 'gcloud auth'
        run: |-
