@@ -63,7 +63,7 @@ jobs:
        with:
             instance_name: 'alphalionserver'
             zone: 'us-central1-a'
-            ssh_private_key: 'SHA256:9/oZWLMWiRQDofSfpLwrH9itxSmOlWyhcVwSDcagDGs'
+            ssh_private_key: '${{ secrets.GCP_SSH_PRIVATE_KEY }}'
             command: 'pwd && sudo ls'    
      - id: 'gcloud'
        name: 'gcloud auth'
