@@ -70,9 +70,9 @@ jobs:
     - run: gcloud projects list
     - name: Run script.sh
       run: |
-            path="/home/runner/work/githubActions-Test/script.sh"
-            chmod +x $path
-            sudo $path 
+           sudo pwd
+           sudo ls
+           
       shell: bash
 
 
