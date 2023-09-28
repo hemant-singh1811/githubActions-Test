@@ -72,7 +72,7 @@ jobs:
       run: pwd
     - name: Run script.sh
       run: |
-           cd / && sudo ls
+           cd / && cd home && sudo ls
      
 
 
