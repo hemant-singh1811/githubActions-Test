@@ -63,7 +63,7 @@ jobs:
        with:
             instance_name: 'alphalionserver'
             zone: 'us-central1-a'
-            ssh_private_key: "AAAAB3NzaC1yc2EAAAADAQABAAABgQCUWIeGNgEL+aXaJYqdxnaLC10HVxjmJMw5hdaFZ0K1dNxtgY8ppujAk+oAi1PGG8jkwvR/0NxdriTh1aJatC8lIGlsCzKsFYlIEiFRWk+5RX+JoIUKiyWpQtTwXmtTs1EJI1Hjuy0qxeuLGHuNtEv6ZIVDxXp3lf91YbUyveyX4nJbKGG0Hg4ymcghpSHZJzljJfbGRN+Rc9U1hQIOnJp/cBqHh>"
+            ssh_private_key: ${{ secrets.GCP_SSH_PRIVATE_KEY }}
             command: 'pwd && sudo ls'    
      - id: 'gcloud'
        name: 'gcloud auth'
