@@ -50,7 +50,6 @@ jobs:
     - id: 'auth'
       name: 'Authenticate to GCP'
       uses: 'google-github-actions/auth@v0.3.1'
-      
       with:
           create_credentials_file: 'true'
           workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER_ID }}
@@ -62,18 +61,23 @@ jobs:
       run: |-
         gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
 
+    
     - id: 'gcloudcomputessh'    
       name: 'gcloud compute ssh'
       run: |-
         gcloud compute ssh --zone $GKE_ZONE "alphalionserver" --project "alphachatdb"
 
-    - name: 'setup to GCP'
-      uses: 'google-github-actions/setup-gcloud@v0"
+    - run: gcloud projects list
+    - name: Run script.sh
+      run: |
+            path="${GITHUB_WORKSPACE}/script.sh"
+            chmod +x $path
+            sudo $path 
+      shell: bash
+
+
       
-    - name :
-        run: |-
-            pwd
-            ls
+     
 
 
 # gcloud compute instances list --project $PROJECT_ID
