@@ -73,9 +73,7 @@ jobs:
     - name: Run script.sh
       run: |
            cd / && sudo ls
-
-           
-      shell: bash
+     
 
 
       
