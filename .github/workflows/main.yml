@@ -72,7 +72,7 @@ jobs:
       run: pwd
     - name: Run script.sh
       run: |
-           cd / && cd home &&  cd ubuntu && ls && cd Alpha_host/ && ls
+           cd / && sudo ls
 
            
       shell: bash
