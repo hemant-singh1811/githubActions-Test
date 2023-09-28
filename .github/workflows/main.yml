@@ -71,6 +71,7 @@ jobs:
     - name: Run script.sh
       run: |
            sudo pwd
+           sudo mkdir test
            sudo ls
            
       shell: bash
